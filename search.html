@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>站內搜尋提示</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 30px; background:#fafafa; }
+
+  /* 搜尋區 */
+  .search-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 250px;
+    z-index: 100;
+  }
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border:1px solid #ccc;
+    border-radius: 8px;
+  }
+  .search-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 5px;
+    background: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .search-button:hover { background:#005fa3; }
+
+  /* 下拉提示 */
+  #suggestions {
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 2px;
+    z-index: 101;
+  }
+  #suggestions div {
+    padding: 8px;
+    cursor: pointer;
+  }
+  #suggestions div:hover {
+    background: #f0f0f0;
+  }
+
+  /* 搜尋結果 */
+  #searchResults {
+    margin-top: 100px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .result {
+    background:#fff; 
+    padding:15px; 
+    margin-bottom:12px; 
+    border-radius:8px; 
+    box-shadow:0 2px 5px rgba(0,0,0,0.1); 
+  }
+  .result a { 
+    font-size:18px; 
+    text-decoration:none; 
+    color:#0077cc; 
+  }
+  .result a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<div class="search-box">
+  <input id="searchInput" class="search-input" type="text" placeholder="輸入文章名稱...">
+  <button id="searchBtn" class="search-button">Enter</button>
+  <div id="suggestions"></div>
+</div>
+
+<div id="searchResults"></div>
+
+<script>
+(async function(){
+  const res = await fetch('/json/search.json'); // 載入文章清單
+  const data = await res.json();
+
+  const input = document.getElementById('searchInput');
+  const button = document.getElementById('searchBtn');
+  const resultsDiv = document.getElementById('searchResults');
+  const suggestDiv = document.getElementById('suggestions');
+
+  function renderSuggestions(q){
+    const kw = q.trim().toLowerCase();
+    if(!kw){ suggestDiv.innerHTML = ""; return; }
+    const hits = data.filter(item => item.title.toLowerCase().includes(kw));
+    suggestDiv.innerHTML = hits.slice(0,5)  // 顯示前5個建議
+      .map(h => `<div data-title="${h.title}">${h.title}</div>`).join('');
+  }
+
+  function search(q){
+    const kw = q.trim().toLowerCase();
+    suggestDiv.innerHTML = ""; // 搜尋後清空提示
+    if(!kw){ resultsDiv.innerHTML = ""; return; }
+    const hits = data.filter(item => item.title.toLowerCase().includes(kw));
+    resultsDiv.innerHTML = hits.length
+      ? hits.map(h => `<div class="result"><a href="${h.url}">${h.title}</a></div>`).join("")
+      : "<p>❌ 找不到符合的文章</p>";
+  }
+
+  // 點擊按鈕搜尋
+  button.addEventListener('click', () => search(input.value));
+
+  // 按 Enter 搜尋
+  input.addEventListener('keydown', e => {
+    if(e.key === "Enter") search(input.value);
+  });
+
+  // 邊輸入文字顯示下拉提示
+  input.addEventListener('input', e => renderSuggestions(e.target.value));
+
+  // 點擊建議項目，填入輸入框
+  suggestDiv.addEventListener('click', e => {
+    if(e.target.dataset.title){
+      input.value = e.target.dataset.title;
+      search(input.value);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
