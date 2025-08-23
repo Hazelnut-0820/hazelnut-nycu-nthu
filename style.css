@@ -91,8 +91,31 @@ h2{
       margin-top: 10px;
     }
 
+    .btn-group {
+  display: flex;
+  justify-content: center;  /* 水平置中 */
+  gap: 16px;                /* 三個按鈕之間的間距 */
+  margin: 20px 0;
+}
+
+.btn-group a {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #021c1f97;  /* 綠色 */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn-group a:hover {
+  background-color: #155d27;  /* hover 深綠 */
+  transform: translateY(-2px);
+}
+
 .btn {
-  width: 30%;                  /* 內容區塊寬度 */
+  width: 70%;                  /* 內容區塊寬度 */
   margin: 20px auto;           /* ✅ 自動左右置中 */
   padding: 20px;
   border: 2px solid #00080997;      /* ✅ 外框 */
@@ -101,7 +124,9 @@ h2{
   text-align: center;          /* ✅ 文字置中 */
   box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* ✅ 陰影讓它更立體 */
 }
-
+.btn p {
+  color: #f7f8f8;   
+}
 .btn a {
   color: #f7f8f8;             /* ✅ 字體顏色深一點 */
   text-decoration: none;
