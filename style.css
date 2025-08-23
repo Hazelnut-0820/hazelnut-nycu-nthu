@@ -128,6 +128,10 @@ h2{
   gap: 20px;
   text-align: left;
 }
+.articles p{
+  margin: 10px 0;
+  text-align: center;
+}
 .articles a{
   text-decoration: none;
   color: #021c1f97;
@@ -142,17 +146,29 @@ h2{
   text-align: center;
 }
 
-.author{
+.author {
+  display: flex;
+  align-items: center;   /* 垂直置中 */
+  justify-content: center; /* 水平置中 */
+}
+
+.author .icon {
+  width: auto;  /* 控制圖片大小 */
+  height: 45px
+}
+
+.author .text {
   font-size: 1rem;
   color: #555;
-  width: 5%;                  /* 內容區塊寬度 */
-  margin: 10px auto;           /* ✅ 自動左右置中 */
+  height: 20px;                  /* 內容區塊高度 */
   padding: 10px;
   border: 2px solid #00080997;      /* ✅ 外框 */
-  border-radius: 12px;         /* ✅ 圓角 */
+  
   background-color: #e4eff197;   /* ✅ 背景色 */
   text-align: center;
+  margin-left: 0; /* 不留空隙 */
 }
+
 .result{
   background:#fff; 
   padding:15px; 
