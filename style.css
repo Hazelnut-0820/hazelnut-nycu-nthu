@@ -157,6 +157,12 @@ h2{
   margin: 10px 0;
   text-align: center;
 }
+.articles img{
+  width: 100%;
+  aspect-ratio: 1 / 1;   /* 強制寬高比 1:1 */
+  object-fit: cover;     /* 保持比例，超出的裁切掉 */
+  border-radius: 8px;    /* 可選：圓角 */
+}
 .articles a{
   text-decoration: none;
   color: #021c1f97;
