@@ -160,7 +160,7 @@ h2{
 .author .text {
   font-size: 1rem;
   color: #555;
-  height: 20px;                  /* 內容區塊高度 */
+  height: 45px;                  /* 內容區塊高度 */
   padding: 10px;
   border: 2px solid #00080997;      /* ✅ 外框 */
   
@@ -216,6 +216,49 @@ h2{
    text-align: left;
 }
 
+
+    :root{
+      --fg:#0f5132;/*深綠*/
+      --fg-2:#145a38;
+      --muted:#6b7280;/*灰*/
+      --bg:#f7faf7;/*淡綠灰底*/
+      --card:#ffffff;
+      --ring:#cfe9da;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:#111;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Noto Sans TC",sans-serif;line-height:1.65}
+    .wrap{max-width:880px;margin:48px auto;padding:0 20px}
+    header{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:28px;text-align:center}
+    header h1{margin:0;font-size:clamp(24px,4vw,36px);color:var(--fg);letter-spacing:.5px}
+    header p{margin:0;color:var(--muted)}
+
+    .card{background:var(--card);border:1px solid var(--ring);border-radius:16px;padding:20px 18px;box-shadow:0 6px 20px rgba(17,24,39,.06);}
+    .grid{display:grid;gap:16px}
+    @media (min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+
+    h2{margin:6px 0 10px;font-size:20px;color:var(--fg-2)}
+    .lead{font-weight:600;color:#0a0a0a}
+    .qa{display:flex;gap:12px;align-items:flex-start}
+    .q{flex:0 0 auto;font-weight:700;color:var(--fg);}
+    .a{flex:1}
+
+    details{border:1px dashed var(--ring);border-radius:12px;padding:12px 14px;background:#fff}
+    summary{cursor:pointer;font-weight:700;color:var(--fg)}
+
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;border:1px solid var(--ring);background:#fff}
+    .center-row{display:flex;justify-content:center;align-items:center;gap:0}/* 圖片與文字緊貼且整組置中 */
+    .center-row img{width:28px;height:auto;}
+    .center-row span{margin-left:0;color:var(--fg);font-weight:600}
+
+    .muted{color:var(--muted)}
+    .todo{background:#fff9db;border-color:#ffe58f}
+
+    /* 列印友善 */
+    @media print{
+      body{background:#fff}
+      .card{box-shadow:none}
+      .wrap{margin:0}
+    }
 
 /*copyright*/
     footer {
