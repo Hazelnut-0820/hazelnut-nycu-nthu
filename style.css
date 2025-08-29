@@ -56,26 +56,7 @@ h2{
       justify-content: center; /* 水平置中 */
       align-items: center;     /* 垂直置中 */
   }
-    /*both*/
-    .both{
-      display:flex;
-      width:50%;
-      flex-direction: column;
-      justify-content: center; /* 水平置中 */
-      align-items: center;     /* 垂直置中 */
-       gap: 20px; /* 圖片和文字的距離 */
-       margin-bottom: 20px; /* 每個 section 底下加空隙 */
-    }
-    .both img {
-      left: 0;
-      max-width: 50%;
-      height: auto;
-    }
 
-.both h2 {
-  color: rgb(16, 82, 45);
-  text-align: center;
-}
     .info{
       width:50%;
       display:flex;
@@ -114,30 +95,6 @@ h2{
   transform: translateY(-2px);
 }
 
-.btn {
-  width: 70%;                  /* 內容區塊寬度 */
-  margin: 20px auto;           /* ✅ 自動左右置中 */
-  padding: 20px;
-  border: 2px solid #00080997;      /* ✅ 外框 */
-  border-radius: 12px;         /* ✅ 圓角 */
-  background-color: #021c1f97;   /* ✅ 背景色 */
-  text-align: center;          /* ✅ 文字置中 */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* ✅ 陰影讓它更立體 */
-}
-.btn p {
-  color: #f7f8f8;   
-}
-.btn a {
-  color: #f7f8f8;             /* ✅ 字體顏色深一點 */
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.btn a:hover {
-  color: #0077cc;              /* ✅ 滑鼠移上去有變色 */
-  border-radius: 54px; 
-}
-
 .content{
   text-align: left;
   line-height: 1.6;
@@ -174,13 +131,15 @@ h2{
   font-size: 2rem;
   font-weight: bold;
   color: #021c1f97;
-  text-align: center;
+  text-align: left;
+  font-weight: bold;
 }
 
 .author {
   display: flex;
   align-items: center;   /* 垂直置中 */
-  justify-content: center; /* 水平置中 */
+  justify-content: left; /* 水平置中 */
+  margin-bottom: 10px;
 }
 
 .author .icon {
@@ -198,6 +157,7 @@ h2{
   background-color: #e4eff197;   /* ✅ 背景色 */
   text-align: center;
   margin-left: 0; /* 不留空隙 */
+  
 }
 
 .result{
@@ -284,12 +244,87 @@ h2{
     .muted{color:var(--muted)}
     .todo{background:#fff9db;border-color:#ffe58f}
 
-    /* 列印友善 */
-    @media print{
-      body{background:#fff}
-      .card{box-shadow:none}
-      .wrap{margin:0}
+        :root{
+      --bg:#0b0c0f; /* 背景 */
+      --card:#12141a; /* 卡片 */
+      --muted:#c8cfdb; /* 次要文字 */
+      --text:#e9eef7; /* 主要文字 */
+      --accent:#86b7ff; /* 強調 */
+      --accent-2:#ffb7d5; /* 次強調 */
+      --border:#232633; /* 邊框 */
+      --ok:#46d39a;
+      --warn:#ffcf5a;
+      --danger:#ff7a90;
     }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f7f8fb;--card:#ffffff;--muted:#5b677a;--text:#0f1726;--accent:#336dff;--accent-2:#d23a87;--border:#e7eaf0;
+      }
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font:16px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* 頁首 */
+    .meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted)}
+    .badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:999px;padding:4px 10px;background:var(--card)}
+
+    /* 版面：側邊目錄 + 內容 */
+    .layout{display:grid;grid-template-columns:260px 1fr;gap:24px}
+    @media (max-width: 980px){.layout{grid-template-columns:1fr}}
+
+    /* 目錄 */
+    nav.toc{position:sticky;top:16px;align-self:start;border:1px solid var(--border);background:var(--card);border-radius:16px;padding:16px}
+    .toc h3{margin:0 0 10px 0;font-size:14px;color:var(--muted);letter-spacing:0.4px}
+    .toc a{display:block;padding:6px 6px;border-radius:8px;color:var(--text)}
+    .toc a:hover{background:rgba(131,149,255,0.12)}
+    .toc ol, .toc ul{margin:0;padding-left:18px}
+
+    /* 內容卡片 */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  text-align: left;
+}
+    section + section{margin-top:18px}
+    h2{margin:0 0 8px 0;font-size:clamp(20px,2.6vw,28px)}
+    h3{margin:18px 0 6px;font-size:18px}
+    p{margin:10px 0;}
+    ul{margin:10px 0;list-style: disc;}
+    .muted{color:var(--muted)}
+
+    /* 表格 */
+    .table{overflow:auto;border-radius:14px;border:1px solid var(--border)}
+    table{width:100%;border-collapse:collapse;min-width:680px}
+    th,td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left}
+    thead th{background:rgba(131,149,255,0.08);font-weight:700}
+    tbody tr:hover{background:rgba(131,149,255,0.06)}
+
+    /* callout */
+    .callout{display:flex;gap:12px;border:1px solid var(--border);padding:14px 16px;border-radius:14px;background:linear-gradient(180deg,rgba(134,183,255,.08),transparent)}
+    .callout.warn{background:linear-gradient(180deg,rgba(255,207,90,.16),transparent)}
+    .callout.danger{background:linear-gradient(180deg,rgba(255,122,144,.14),transparent)}
+    .callout .icon{font-size:20px}
+
+    /* 清單美化 */
+    ul{padding-left:20px}
+    li+li{margin-top:4px}
+
+
+    /* 小元件 */
+    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--card);color:var(--text);padding:8px 12px;border-radius:10px}
+    .btn:hover{filter:brightness(1.05)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:rgba(134,183,255,.12);border:1px solid var(--border);padding:4px 8px;border-radius:999px;font-size:13px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:720px){.grid-2{grid-template-columns:1fr}}
+    details{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--card)}
+    details+details{margin-top:10px}
 
 /*copyright*/
     footer {
@@ -299,3 +334,7 @@ h2{
       font-size: 0.9rem;
       color: #130d01;
     }
+
+    /*<div class="meta">
+        <span class="badge">筆者：陽明交大機械系 117 級</span>
+      </div>*/
