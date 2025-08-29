@@ -180,7 +180,7 @@ h2{
   text-align: left;
 }
 .result h3{
-  font-size: 1.0rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #06677297;
   text-align: left;
@@ -201,7 +201,7 @@ h2{
 }
 .result li{
   font-size: 1.0rem;
-  color: #06677297;
+  color: #031c1f97;
   text-decoration: none;
   font-weight: bold;
    text-align: left;
@@ -265,7 +265,7 @@ h2{
     html{scroll-behavior:smooth}
     body{margin:0;font:16px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text)}
     a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
+    a:hover{text-decoration:none}
     .wrap{max-width:1100px;margin:0 auto;padding:24px}
 
     /* 頁首 */
@@ -318,7 +318,7 @@ h2{
 
     /* 小元件 */
     .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--card);color:var(--text);padding:8px 12px;border-radius:10px}
-    .btn:hover{filter:brightness(1.05)}
+    .btn:hover{filter:brightness(1.05);text-decoration: none;}
     .chips{display:flex;flex-wrap:wrap;gap:8px}
     .chip{background:rgba(134,183,255,.12);border:1px solid var(--border);padding:4px 8px;border-radius:999px;font-size:13px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
